@@ -1,0 +1,26 @@
+{
+  "name": "pull-paginated-api-request",
+  "version": "1.0.0",
+  "description": "Use this pull-stream to lazily traverse a paginated (REST) API!",
+  "main": "index.js",
+  "scripts": {
+    "test": "tape test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/regular/pull-paginated-api-request.git"
+  },
+  "keywords": [
+    "pull-stream",
+    "lazy",
+    "rest",
+    "api",
+    "pagination"
+  ],
+  "author": "Jan Bölsche <jan@lagomorph.de> (http://regular.codes)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/regular/pull-paginated-api-request/issues"
+  },
+  "homepage": "https://github.com/regular/pull-paginated-api-request#readme"
+}
