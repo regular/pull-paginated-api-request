@@ -22,5 +22,13 @@
   "bugs": {
     "url": "https://github.com/regular/pull-paginated-api-request/issues"
   },
-  "homepage": "https://github.com/regular/pull-paginated-api-request#readme"
+  "homepage": "https://github.com/regular/pull-paginated-api-request#readme",
+  "devDependencies": {
+    "tape": "^4.2.0"
+  },
+  "dependencies": {
+    "concat-stream": "^1.5.0",
+    "debug": "^2.2.0",
+    "hyperquest": "^1.2.0"
+  }
 }
