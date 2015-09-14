@@ -59,7 +59,7 @@ This is the function retruned by `paginated` (see above). The first argument `ob
 
 ## Advanced Usage
 
-Instead of specifying an array of pathways, you can provide your own function to extract properties from the server response. See test.js for details.
+Instead of specifying an array of pathways, you can provide your own function to extract properties from the server response. See [test.js](https://github.com/regular/pull-paginated-api-request/blob/master/test.js#L89) for details.
 
 ## License
 MIT
