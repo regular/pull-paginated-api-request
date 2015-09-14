@@ -4,7 +4,7 @@
   "description": "Use this pull-stream to lazily traverse a paginated (REST) API!",
   "main": "index.js",
   "scripts": {
-    "test": "tape test/*"
+    "test": "tape test.js"
   },
   "repository": {
     "type": "git",
@@ -24,11 +24,15 @@
   },
   "homepage": "https://github.com/regular/pull-paginated-api-request#readme",
   "devDependencies": {
-    "tape": "^4.2.0"
+    "bl": "^1.0.0",
+    "tape": "^4.2.0",
+    "through": "^2.3.8"
   },
   "dependencies": {
     "concat-stream": "^1.5.0",
     "debug": "^2.2.0",
-    "hyperquest": "^1.2.0"
+    "pathway": "^1.0.1",
+    "pull-generate": "^2.2.0",
+    "pull-stream": "^2.28.1"
   }
 }
