@@ -35,7 +35,7 @@ module.exports = function (makeRequest) {
                 debug('items are %s', ways[0], typeof items);
                 if (typeof items === 'undefined') return cb(new Error('no items extracted'));
                 var nextToken = ways.length>1 ? pathway(obj, ways[1]) : undefined;
-                cb(null, items, nextToken[0]);
+                cb(null, items, nextToken ? nextToken[0] : undefined);
             };
         }
         return pull(
