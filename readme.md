@@ -36,6 +36,8 @@ Use this pull-stream to lazily traverse a paginated (REST) API
     // does not contain a nextPageToken proerty
 ```
 
+See [regular/liked-on-youtube](https://github.com/regular/liked-on-youtube) for a real-life example.
+
 ## API
 
 ### paginated(makeResponseStream)
@@ -54,6 +56,10 @@ Takes a factory function that provides the response of an API server as a Node-s
 This is the function retruned by `paginated` (see above). The first argument `obj` will simply be forwarded to `makeResponseStream`. The second argument is an array of `pathways`. They describe where to find the items (the stuff that we are interessted in) and the token of the next page of API results. The pathways themselves are arrays. They describe the location of those two properties within the JSON-formatted response of the API server. See [pathway](https://github.com/substack/node-pathway) for details.
 
 `request` returns a pull-stream source. It generates output only when that output is consumed. This means that only those result pages get requested from the server that actually are needed. See [Dominic Tarr's pull-stream](https://github.com/dominictarr/pull-stream) to learn more about pull-streams and the power of laziness.
+
+## Advanced Usage
+
+Instead of specifying an array of pathways, you can provide your own function to extract properties from the server response. See test.js for details.
 
 ## License
 MIT
