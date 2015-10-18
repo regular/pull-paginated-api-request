@@ -24,7 +24,6 @@
   },
   "homepage": "https://github.com/regular/pull-paginated-api-request#readme",
   "devDependencies": {
-    "bl": "^1.0.0",
     "tape": "^4.2.0",
     "through": "^2.3.8"
   },

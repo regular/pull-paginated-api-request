@@ -2,12 +2,12 @@ var par = require('./');
 var test = require('tape');
 var debug = require('debug')('test');
 var pull = require('pull-stream');
-var bl = require('bl');
 var through = require('through');
 
 function mock(t, expectedQuery, expectedToken, responses, opts) {
     opts = opts ||{};
     var fail = opts.fail;
+    var headers = opts.headers || [];
     var i = 0;
     return function makeRequest(query, token) {
         debug('make request for %s with token=%s', query, token);
@@ -24,14 +24,38 @@ function mock(t, expectedQuery, expectedToken, responses, opts) {
                 responseStream.write(fail);
             }, 250);
         } else {
-            responseStream = bl();
-            responseStream.append(responses[i]);
+            responseStream = through(function(data) {
+                if (data.headers) this.emit('response', {headers: data.headers});
+                this.push(data.body);
+                this.push(null);
+            });
+            (function(body, headers) {
+                setTimeout(function() {
+                    responseStream.write({headers: headers, body: body});
+                }, 250);
+            })(responses[i], headers[i]);
         }
         i++;
         return responseStream;
     };
 }
 
+test('call extract with headers if its arity is three', function(t) {
+    var expectedValues = [1,2,3];
+    var req = par(mock(t, ['query'],[null],['response'], {headers: [{abc:123}]}));
+    var stream = req('query', function(response, headers, cb) {
+        debug('extract called');
+        t.equal(response.toString(), 'response');
+        t.deepEqual(headers, {abc: 123});
+        cb(null, expectedValues, undefined);}
+    );
+    pull(
+        stream,
+        pull.collect(function(end, values) {
+            t.end();
+        })
+    );
+});
 test('immediately aborts pull-stream source when token === undefined', function(t) {
     var expectedValues = [1,2,3];
     var req = par(mock(t, ['query'],[null],['response']));

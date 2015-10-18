@@ -47,8 +47,17 @@ module.exports = function (makeRequest) {
                     debug('error: %s', err.message);
                     cb(err);
                 });
+                var headers = {};
+                responseStream.on('response', function(response) {
+                    debug('received headers: %s', JSON.stringify(response.headers));
+                    headers = response.headers;
+                });
                 responseStream.pipe(concat(function(response) {
-                    extract(response, cb);
+                    if (extract.length === 2) {
+                        extract(response, cb);
+                    } else if (extract.length === 3) {
+                        extract(response, headers, cb);
+                    }
                 }));
             }),
             pull.flatten()
